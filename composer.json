@@ -1,0 +1,23 @@
+{
+  "name": "samaphp/lifxlan",
+  "description": "LIFX LAN protocol library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Saud bin Mohammed",
+      "email": "saud@samaphp.com",
+      "homepage": "https://samaphp.com"
+    }
+  ],
+  "keywords": [
+    "Lifx",
+    "Lifx Lan",
+    "Lifx Lan Protocol"
+  ],
+  "autoload": {
+    "psr-4": { "samaphp\\": "src/" }
+  },
+  "require": {
+    "php-64bit": ">=7.1"
+  }
+}
