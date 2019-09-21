@@ -2,15 +2,44 @@
 
 namespace samaphp;
 
+use samaphp\Connection\Socket;
+
 Class LifxLan {
 
-  public function __construct()
-  {
+  /**
+   * @var \samaphp\Connection\ConnectionInterface
+   */
+  protected $driver;
 
+  public function __construct($driver = NULL)
+  {
+    $this->driver = $driver ?: new Socket();
   }
 
   public static function discover() {
-    return [1,2,3];
+    $lights = [
+      [
+        'label' => '',
+        'ip' => '',
+        'port' => '',
+      ],
+      [
+        'label' => '',
+        'ip' => '',
+        'port' => '',
+      ],
+    ];
+
+    return $lights;
+  }
+
+  public function connect($targeted_ip, $data) {
+    $driver = $this->getDriver();
+    return $driver->connect($targeted_ip, $data);
+  }
+
+  public function getDriver() {
+    return $this->driver;
   }
 
 }
