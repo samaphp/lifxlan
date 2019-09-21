@@ -1,6 +1,6 @@
 <?php
 
-namespace samaphp\Connection;
+namespace Samaphp\LifxLan\Connection;
 
 class Socket implements ConnectionInterface {
 

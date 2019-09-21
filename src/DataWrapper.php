@@ -1,6 +1,6 @@
 <?php
 
-namespace samaphp;
+namespace Samaphp\LifxLan;
 
 class DataWrapper {
 

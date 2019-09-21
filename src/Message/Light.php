@@ -1,9 +1,9 @@
 <?php
 
-namespace samaphp\Message;
+namespace Samaphp\LifxLan\Message;
 
-use samaphp\LifxLan;
-use samaphp\DataWrapper;
+use Samaphp\LifxLan\LifxLanClass;
+use Samaphp\LifxLan\DataWrapper;
 
 Class Light {
 
@@ -22,9 +22,9 @@ Class Light {
     'kelvin' => 0,
   ];
 
-  public function __construct($light_ip = FALSE, LifxLan $lifx_lan = NULL)
+  public function __construct($light_ip = FALSE, LifxLanClass $lifx_lan = NULL)
   {
-    $this->lifx_lan = $lifx_lan ?: new LifxLan();
+    $this->lifx_lan = $lifx_lan ?: new LifxLanClass();
     $this->light_ip = $light_ip;
     if (!filter_var($this->light_ip, FILTER_VALIDATE_IP)) {
       throw new \RuntimeException('Light IP is not valid.');

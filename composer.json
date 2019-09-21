@@ -15,7 +15,7 @@
     "Lifx Lan Protocol"
   ],
   "autoload": {
-    "psr-4": { "samaphp\\": "src/" }
+    "psr-4": { "Samaphp\\LifxLan\\": "src/" }
   },
   "require": {
     "php-64bit": ">=7.1"

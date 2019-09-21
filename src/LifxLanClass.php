@@ -1,13 +1,13 @@
 <?php
 
-namespace samaphp;
+namespace Samaphp\LifxLan;
 
-use samaphp\Connection\Socket;
+use Samaphp\LifxLan\Connection\Socket;
 
-Class LifxLan {
+Class LifxLanClass {
 
   /**
-   * @var \samaphp\Connection\ConnectionInterface
+   * @var \Samaphp\LifxLan\Connection\ConnectionInterface
    */
   protected $driver;
 
