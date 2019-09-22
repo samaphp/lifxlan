@@ -48,7 +48,13 @@ Class Light {
     ];
   }
 
-  public function setColorByName($color_name) {
+  /**
+   * @param $color_name
+   * @param bool $brightness Scale 0 to 100.
+   *
+   * @return string
+   */
+  public function setColorByName($color_name, $brightness = FALSE) {
     $color_names = $this->colorNames();
     // If color name is not defined we will set Green color.
     if (!isset($color_names[$color_name])) {
@@ -56,6 +62,11 @@ Class Light {
     }
 
     $color_codes = $color_names[$color_name];
+    if (($brightness) && is_numeric($brightness) && ($brightness <= 100)) {
+      // Getting the brightness value to send it to Lifx. (max = 65535).
+      $color_codes[2] = ($brightness / 100) * 65535;
+    }
+
     return $this->setColor($color_codes[0], $color_codes[1], $color_codes[2], $color_codes[3]);
   }
 
