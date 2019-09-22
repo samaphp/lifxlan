@@ -62,7 +62,7 @@ Class Light {
     }
 
     $color_codes = $color_names[$color_name];
-    if (($brightness) && is_numeric($brightness) && ($brightness <= 100)) {
+    if (($brightness !== FALSE) && is_numeric($brightness) && ($brightness <= 100)) {
       // Getting the brightness value to send it to Lifx. (max = 65535).
       $color_codes[2] = ($brightness / 100) * 65535;
     }
