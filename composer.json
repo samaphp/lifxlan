@@ -18,6 +18,6 @@
     "psr-4": { "Samaphp\\LifxLan\\": "src/" }
   },
   "require": {
-    "php-64bit": ">=7.1"
+    "php": ">=7.1"
   }
 }
