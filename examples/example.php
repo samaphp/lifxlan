@@ -1,5 +1,7 @@
 <?php
 
+// Don't miss to install needful libraries using Composer to generate
+// autoload.php file.
 require __DIR__ . '/../vendor/autoload.php';
 
 use Samaphp\LifxLan\Message\Light;
