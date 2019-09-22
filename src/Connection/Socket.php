@@ -9,7 +9,7 @@ class Socket implements ConnectionInterface {
       $host = sprintf('udp://%s', $targeted_ip);
       $socket = fsockopen($host, $targeted_port, $errno, $errstr);
       fwrite($socket, $data);
-      stream_set_timeout($socket, 2, 0);
+      stream_set_timeout($socket, 3, 1);
       $data = fgets($socket);
       fclose($socket);
       return $data;
