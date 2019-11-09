@@ -90,7 +90,7 @@ class DataWrapper {
 
   public function protocolHeaderData()
   {
-    return $this->wrap("Pvv",
+    return $this->wrap("evv",
       $this->protocol_header['reserved'],
       $this->protocol_header['type'],
       $this->protocol_header['reserved2']
