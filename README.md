@@ -9,4 +9,10 @@ $light_ip = '192.168.1.x';
 $Light = new Light($light_ip);
 $brightness = 40;
 $Light->setColorByName('white_warm', $brightness);
+
+// Set light power on.
+$Light->setPowerStatus('on');
+
+// Set light power off.
+$Light->setPowerStatus('off');
 ```
