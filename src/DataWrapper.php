@@ -103,4 +103,10 @@ class DataWrapper {
     // return array_walk($data, 'pack');
     return call_user_func_array('pack', $data);
   }
+
+  public function unwrap($format, $data)
+  {
+    return unpack($format, $data);
+  }
+
 }
