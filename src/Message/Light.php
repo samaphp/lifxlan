@@ -51,10 +51,11 @@ Class Light {
   /**
    * @param $color_name
    * @param bool $brightness Scale 0 to 100.
+   * @param bool $force_power_effect If brightness 0 = off, brightness > 0 = on.
    *
    * @return string
    */
-  public function setColorByName($color_name, $brightness = FALSE) {
+  public function setColorByName($color_name, $brightness = FALSE, $force_power_effect = TRUE) {
     $color_names = $this->colorNames();
     // If color name is not defined we will set Green color.
     if (!isset($color_names[$color_name])) {
@@ -67,15 +68,15 @@ Class Light {
       $color_codes[2] = ($brightness / 100) * 65535;
     }
 
-    return $this->setColor($color_codes[0], $color_codes[1], $color_codes[2], $color_codes[3]);
+    return $this->setColor($color_codes[0], $color_codes[1], $color_codes[2], $color_codes[3], $force_power_effect);
   }
 
-  public function setColor($hue, $saturation, $bright, $kelvin) {
+  public function setColor($hue, $saturation, $brightness, $kelvin, $force_power_effect = FALSE) {
     $data_wrapper = new DataWrapper();
     $data_wrapper->protocol_header['type'] = 102;
     $this->payload['hue'] = $hue;
     $this->payload['saturation'] = $saturation;
-    $this->payload['brightness'] = $bright;
+    $this->payload['brightness'] = $brightness;
     $this->payload['kelvin'] = $kelvin;
 
     $frame_address = $data_wrapper->frameAddressData();
@@ -93,7 +94,15 @@ Class Light {
     $frame = $data_wrapper->frameData($frame_address, $protocol_header, $payload);
 
     $packet = $frame . $frame_address . $protocol_header . $payload;
-    return $this->lifx_lan->connect($this->light_ip, $packet);
+
+    $res = $this->lifx_lan->connect($this->light_ip, $packet);
+
+    // We will auto switch on the light.
+    if ($force_power_effect) {
+      $this->setPowerStatus($brightness);
+    }
+
+    return $res;
   }
 
   /**
