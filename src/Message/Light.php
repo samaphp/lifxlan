@@ -93,7 +93,53 @@ Class Light {
     $frame = $data_wrapper->frameData($frame_address, $protocol_header, $payload);
 
     $packet = $frame . $frame_address . $protocol_header . $payload;
-
     return $this->lifx_lan->connect($this->light_ip, $packet);
   }
+
+  /**
+   * To power on or off the light.
+   *
+   * @param string $status
+   *   This will be (on) or (off).
+   *
+   * @return mixed
+   */
+  public function setPowerStatus($status = 'on') {
+    if ($status != 'off') {
+      // Anything not off will be considered as on.
+      $status = 'on';
+      $status_value = 1;
+    }
+    else {
+      // This is off.
+      $status_value = 0;
+    }
+
+    $data_wrapper = new DataWrapper();
+    // As per document the SetPower value is 117.
+    // Source: https://lan.developer.lifx.com/v2.0/docs/light-messages#section-setpower-117
+    $data_wrapper->protocol_header['type'] = 117;
+    $this->payload['level'] = (($status_value * 100) / 100) * 65535;
+    $this->payload['duration'] = 3;
+
+    // Require a response.
+    // $data_wrapper->frame_address['res_required'] = 1; //.
+    $frame_address = $data_wrapper->frameAddressData();
+
+    $protocol_header = $data_wrapper->protocolHeaderData();
+    $payload = $data_wrapper->wrap(
+      'vV',
+      $this->payload['level'],
+      $this->payload['duration']
+    );
+
+    $frame = $data_wrapper->frameData($frame_address, $protocol_header, $payload);
+
+    $packet = $frame . $frame_address . $protocol_header . $payload;
+
+    $res = $this->lifx_lan->connect($this->light_ip, $packet);
+    // $parsed_result = $data_wrapper->unwrap('vlevel', $res); //.
+    return $res;
+  }
+
 }
