@@ -27,9 +27,11 @@ $kelvin = 9000;
 // Insert your light IP.
 $light_ip = '192.168.1.169';
 $Light = new Light($light_ip);
+// $Light->setTimeout(1);
 // $res = $Light->setPowerStatus('on');
-// $res = $Light->setPowerStatus('off');
-$Light->setColorByName('white_warm', 40);
+// $res = $Light->setTimeout(0.8)->setPowerStatus('off');
+// $Light->setColorByName('white_warm', 40);
+$Light->setTimeout(0.8)->setColorByName('white_cool', 10);
 
 // List of pre-defined colors by this class to use with setColorByName().
 print_r(array_keys($Light->colorNames()));
