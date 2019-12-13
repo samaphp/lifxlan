@@ -31,6 +31,11 @@ Class Light {
     }
   }
 
+  public function setTimeout($timeout) {
+    $this->lifx_lan->setTimeout($timeout);
+    return $this;
+  }
+
   public function colorNames() {
     return [
       'white' => [65535, 0, 65535, 4500],
@@ -115,7 +120,7 @@ Class Light {
    */
   public function setPowerStatus($status = 'on') {
     if ($status != 'off') {
-      // Anything not off will be considered as on.
+      // Anything not off will be considered as on. We will override the value.
       $status = 'on';
       $status_value = 1;
     }
