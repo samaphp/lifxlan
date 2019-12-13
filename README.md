@@ -16,3 +16,11 @@ $Light->setPowerStatus('on');
 // Set light power off.
 $Light->setPowerStatus('off');
 ```
+Advanced use:
+```php
+// Set a custom value for the connection timeout.
+$Light->setTimeout(2);
+
+// Custom timeout per method.
+$Light->setTimeout(1)->setColorByName('white_cool', 10);
+```
